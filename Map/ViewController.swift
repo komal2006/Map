@@ -9,7 +9,8 @@
 import UIKit
 import MapKit
 class ViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDelegate {
-  
+   
+    
    var count: Int = 0
     @IBOutlet weak var label6: UILabel!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,27 +23,27 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate, MKMapViewDe
 mapView.setCenter(location, animated: true)
      setMapview()
    }
-func addPolyline()
-{
-     let point1: [CLLocationCoordinate2D] = [points[0], points[1]]
-     let polyline1 = MKPolyline(coordinates: point1, count: point1.count)
-     let point2: [CLLocationCoordinate2D] = [points[1], points[2]]
-     let polyline2 = MKPolyline(coordinates: point2, count: point2.count)
-     let point3: [CLLocationCoordinate2D] = [points[2], points[3]]
-     let polyline3 = MKPolyline(coordinates: point3, count: point3.count)
-     let point4: [CLLocationCoordinate2D] = [points[3], points[4]]
-     let polyline4 = MKPolyline(coordinates: point4, count: point4.count)
-    let point5: [CLLocationCoordinate2D] = [points[4], points[0]]
-    let polyline5 = MKPolyline(coordinates: point5, count: point5.count)
-    let point6: [CLLocationCoordinate2D] = [points[5], points[5]]
-       let polyline6 = MKPolyline(coordinates: point6, count: point6.count)
-     mapView?.addOverlay(polyline1)
-     mapView?.addOverlay(polyline2)
-     mapView?.addOverlay(polyline3)
-    mapView?.addOverlay(polyline4)
-    mapView?.addOverlay(polyline5)
-     mapView?.addOverlay(polyline6)
-   }
+//func addPolyline()
+//{
+//     let point1: [CLLocationCoordinate2D] = [points[0], points[1]]
+//     let polyline1 = MKPolyline(coordinates: point1, count: point1.count)
+//     let point2: [CLLocationCoordinate2D] = [points[1], points[2]]
+//     let polyline2 = MKPolyline(coordinates: point2, count: point2.count)
+//     let point3: [CLLocationCoordinate2D] = [points[2], points[3]]
+//     let polyline3 = MKPolyline(coordinates: point3, count: point3.count)
+//     let point4: [CLLocationCoordinate2D] = [points[3], points[4]]
+//     let polyline4 = MKPolyline(coordinates: point4, count: point4.count)
+//    let point5: [CLLocationCoordinate2D] = [points[4], points[5]]
+//    let polyline5 = MKPolyline(coordinates: point5, count: point5.count)
+//    let point6: [CLLocationCoordinate2D] = [points[5], points[0]]
+//       let polyline6 = MKPolyline(coordinates: point6, count: point6.count)
+//     mapView?.addOverlay(polyline1)
+//     mapView?.addOverlay(polyline2)
+//     mapView?.addOverlay(polyline3)
+//    mapView?.addOverlay(polyline4)
+//    mapView?.addOverlay(polyline5)
+//     mapView?.addOverlay(polyline6)
+//   }
    
    func addPolygon() {
      let polygon = MKPolygon(coordinates: &points, count: points.count)
@@ -57,36 +58,43 @@ func addPolyline()
      
      let distance1 = location1.distance(from: location2)
      let distance2 = location2.distance(from: location3)
-     let distance3 = location1.distance(from: location3)
-     let distance4 = location1.distance(from: location4)
-     let distance5 = location1.distance(from: location5)
+     let distance3 = location3.distance(from: location4)
+     let distance4 = location4.distance(from: location5)
+     let distance5 = location5.distance(from: location1)
+    
+ //   let labels = label1 , label2 , label3,label4, label5
     
      
      
      let label1: UILabel = UILabel(frame: CGRect(x: (screenPoints[0].x + screenPoints[1].x - 80) / 2, y: (screenPoints[0].y + screenPoints[1].y) / 2, width: 120, height: 30))
      label1.text = "\(Int(distance1/1000)) km"
      self.mapView.addSubview(label1)
+  //  self.mapView.willRemoveSubview(label1)
      
      let label2: UILabel = UILabel(frame: CGRect(x: (screenPoints[1].x + screenPoints[2].x - 80) / 2, y: (screenPoints[1].y + screenPoints[2].y) / 2, width: 120, height: 30))
      label2.text = "\(Int(distance2/1000)) km"
      self.mapView.addSubview(label2)
+    // self.mapView.willRemoveSubview(label2)
      
      let label3: UILabel = UILabel(frame: CGRect(x: (screenPoints[2].x + screenPoints[3].x - 80) / 2, y: (screenPoints[2].y + screenPoints[3].y) / 2, width: 120, height: 30))
      label3.text = "\(Int(distance3/1000)) km"
      self.mapView.addSubview(label3)
+  //   self.mapView.willRemoveSubview(label3)
     
     let label4: UILabel = UILabel(frame: CGRect(x: (screenPoints[3].x + screenPoints[4].x - 80) / 2, y: (screenPoints[3].y + screenPoints[4].y) / 2, width: 120, height: 30))
         label4.text = "\(Int(distance4/1000)) km"
         self.mapView.addSubview(label4)
+   //  self.mapView.willRemoveSubview(label4)
     
     let label5: UILabel = UILabel(frame: CGRect(x: (screenPoints[4].x + screenPoints[0].x - 80) / 2, y: (screenPoints[4].y + screenPoints[0].y) / 2, width: 120, height: 30))
         label5.text = "\(Int(distance5/1000)) km"
         self.mapView.addSubview(label5)
+    // self.mapView.willRemoveSubview(label5)
     
   //  let label6: UILabel = UILabel(frame: CGRect(x: (screenPoints[5].x + screenPoints[0].x - 80) / 2, y: (screenPoints[5].y + screenPoints[0].y) / 2, width: 120, height: 30))
     
-        label6.text = "\(Int(distance1+distance2+distance3+distance4+distance5)) km"
-        print ("hayeefdsfdsfafkldkflsflsldkflkdslkfs \(label6)")
+        label6.text = "\(double_t(distance1+distance2+distance3+distance4+distance5)/1000) km"
+       // print ("hayeefdsfdsfafkldkflsflsldkflkdslkfs \(label6)")
       // self.mapView.addSubview(label6)
     
      
@@ -99,6 +107,13 @@ func addPolyline()
      lpgr.delegate = self
      self.mapView.addGestureRecognizer(lpgr)
    }
+    
+    func removeMapView(){
+      self.mapView.delegate = self
+      let lpgr = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(gestureReconizer:)))
+      lpgr.numberOfTapsRequired = 2
+      lpgr.delegate = self
+     }
    
    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
      return true
@@ -115,18 +130,20 @@ func addPolyline()
        let locationCoordinate = mapView.convert(touchLocation,toCoordinateFrom: mapView)
        annotation.coordinate = locationCoordinate
        self.mapView.addAnnotation(annotation)
+      
        points.append(locationCoordinate)
 //       print("Tapped at lat: \(locationCoordinate.latitude) long: \(locationCoordinate.longitude)")
      }
+    
      if (count <= 4) {
         
        addpolyline2()
         //addPolygon()
      } else if (count == 5){
        addPolygon()
-       // addPolyline()
-//     } else if (count <= 4) {
-//        addPolyline()
+        addpolyline2()
+        
+     
     }
    }
    
@@ -146,6 +163,7 @@ func addPolyline()
        
      } else if overlay is MKPolygon {
        let renderer = MKPolygonRenderer(polygon: overlay as! MKPolygon)
+         renderer.strokeColor = UIColor.green
        renderer.fillColor = UIColor.red.withAlphaComponent(0.5)
        return renderer
      }
@@ -157,5 +175,49 @@ func addPolyline()
         let polyline = MKPolyline (coordinates: &points, count: points.count)
         mapView.addOverlay(polyline)
     }
+  
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+     
+    let overlays = mapView.overlays
+    mapView.removeOverlays(overlays)
+    points.removeAll()
+  
+    mapView.removeAnnotation(view.annotation!)
+       label6.removeFromSuperview()
+   
+        
+        
+        
+        
+        
+//        func doubleTap(){
+//            do {
+//                let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(onBaseTapOnly))
+//                doubleTapRecognizer.numberOfTapsRequired = 2
+//                mapView.subviews.removeAll()
+//                doubleTapRecognizer.delegate = self
+//                self.view.addGestureRecognizer(doubleTapRecognizer)
+//            }
+//            func onBaseTapOnly(sender: UITapGestureRecognizer) {
+//                if sender.state == .ended {
+//                       //reac
+     //   t to tap
+//                   }
+
+        }
+        
+        
+       
+    
+    
+   // addLocation2d()
+        
+        
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+      
+      mapView.removeAnnotation(view.annotation!)
+    }
 }
+
 
